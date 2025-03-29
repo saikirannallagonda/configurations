@@ -4,6 +4,11 @@ syntax on
 " Set default color scheme
 colorscheme desert
 
+" Use system clipboard for copy/paste
+set clipboard=unnamedplus
+" Wrap long lines at the edge of the window
+set wrap
+
 " Set line numbers
 set number
 set relativenumber
@@ -22,10 +27,9 @@ filetype indent on
 set encoding=utf-8
 
 " Highlight current line
-set cursorline
-
+"set cursorline
 " Highlight cursor line underneath the cursor vertically.
-set cursorcolumn
+"set cursorcolumn
 
 " Enable mouse support
 set mouse=a
