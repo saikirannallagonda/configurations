@@ -1,0 +1,46 @@
+window {
+    background-color: rgba(34, 36, 43, 0.8); /* semi-transparent dark */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    width: 400px; /* compact width */
+    font-family: "SF Pro Text", "Segoe UI", sans-serif;
+    color: #f8f8f2;
+}
+
+#input {
+    background-color: rgba(40, 42, 54, 0.9);
+    border-radius: 8px;
+    border: none;
+    padding: 6px 12px;
+    font-size: 16px;
+    color: #f8f8f2;
+    margin-bottom: 6px;
+}
+
+#entry {
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #f8f8f2;
+    background: transparent;
+}
+
+#entry:selected {
+    background-color: rgba(80, 250, 123, 0.3); /* subtle green highlight */
+    color: #50fa7b;
+}
+
+#text {
+    font-size: 14px;
+}
+
+#scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 4px;
+}
+
+#outer-box {
+    padding: 0;
+}
+

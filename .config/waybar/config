@@ -1,0 +1,124 @@
+{
+    "layer": "top",
+        "position": "top",
+        "height": 32,
+        "spacing": 6,
+        "modules-left": [
+            "hyprland/workspaces",
+        "mpd"
+        ],
+        "modules-center": [
+            "hyprland/window"
+        ],
+        "modules-right": [
+            "network",
+        "bluetooth",
+        "backlight",
+        "pulseaudio",
+        "custom/mic",
+        "battery",
+        "clock"
+        ],
+
+        "hyprland/workspaces": {
+            "format": "{icon} {name}",
+            //"on-click": "hyprctl dispatch workspace {name}"
+            "on-click": "activate",
+            "all-outputs": true,      // Show workspaces from all monitors
+            "disable-scroll": true,   // Prevent accidental workspace switching with scroll
+            "format-icons": {
+                "active": "",
+                "default": "",
+                "empty": ""
+            },
+            "swap-icon-label": true
+        },
+
+        "hyprland/window": {
+            "format": "{class} {title}",
+            "icon": true,
+            "rewrite": {
+                "^(.{55}).*$": "$1…"
+            }
+        },
+
+        "network": {
+            "interface": "wlan0", // Change to your interface, e.g., "wlp2s0"
+            "format": "{ifname}",
+            "format-wifi": "",
+            "format-ethernet": "󰊗",
+            "format-disconnected": " ",
+            "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+            "tooltip-format-wifi": "{essid} ({signalStrength}%) ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+            "tooltip-format-ethernet": "{ifname}/{wired}/{ipaddr}/{cidr}  ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+            "tooltip-format-disconnected": "  Disconnected",
+            "max-length": 50,
+            "format-icons": [
+                "󰤯",  // very low signal
+            "󰤟",  // low signal
+            "󰤢",  // medium signal
+            "󰤥",  // good signal
+            "󰤨"   // excellent signal
+            ]
+        },
+
+        "bluetooth": {
+            "format": "{icon}",
+            "format-icons": {
+                "enabled": "",      // Bluetooth symbol (Font Awesome)
+                "disabled": "",     // Strikethrough or alternative icon
+                "on": "",
+                "off": "",
+                "connected": ""
+            },
+            "tooltip-format": "{status} {device_alias}"
+        },
+
+        "battery": {
+            "format": "{icon} {capacity}%",
+            "format-charging": " {capacity}%",
+            "format-plugged": " {capacity}%",
+            "format-icons": ["", "", "", "", ""]
+        },
+
+        "backlight": {
+            "format": " {percent}%",
+            "tooltip-format": "Brightness"
+        },
+
+        "pulseaudio": {
+            "format": "{icon} {volume}%",
+            "format-muted": " Muted",
+            "format-icons": ["", "", ""],
+            "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+            "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+            "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+            "max-volume": 100
+        },
+
+        "custom/mic": {
+            "exec": "~/.config/waybar/scripts/mic_status.sh",
+            "interval": 2,
+            "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+            "tooltip-format": "Mic",
+        },
+
+        "clock": {
+            "format": " {:%a %d %b %I:%M:%S %p}",
+            "tooltip-format": "{:%A, %d %B %Y}",
+            "interval": 1
+        },
+
+        "mpd": {
+            "server": "localhost",      // MPD server address, empty means default localhost
+            "port": 6600,               // Default MPD port
+            "password": "",             // Password if your MPD requires one
+            "interval": 5,              // Refresh interval in seconds
+            "timeout": 30,              // Connection timeout in seconds
+            "format": " {artist} - {title}",
+            "format-paused": " Paused: {artist} - {title}",
+            "format-stopped": " Stopped",
+            "unknown-tag": "N/A"        // Text for missing tags
+        }
+}
+

@@ -1,0 +1,94 @@
+{
+  "custom/launcher": {
+    "format": "",
+    "on-click": "rofi -show drun",
+    "tooltip-format": "Open App Launcher"
+  },
+  "group/quicklinks": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/quicklink1",
+      "custom/quicklink2",
+      "custom/quicklink3"
+    ]
+  },
+  "custom/quicklink1": {
+    "format": "",
+    "on-click": "kitty",
+    "tooltip-format": "Open Terminal"
+  },
+  "custom/quicklink2": {
+    "format": "",
+    "on-click": "firefox",
+    "tooltip-format": "Open Browser"
+  },
+  "custom/quicklink3": {
+    "format": "",
+    "on-click": "thunar",
+    "tooltip-format": "Open File Manager"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "hyprctl dispatch workspace {name}"
+  },
+  "bluetooth": {
+    "format": "{icon} {status}",
+    "format-icons": {
+      "enabled": "",
+      "disabled": ""
+    },
+    "tooltip-format": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias} ({device_address})",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}: {device_battery_percentage}%"
+  },
+  "network": {
+    "format-wifi": " {essid} {signalStrength}%",
+    "format-ethernet": " {ipaddr}",
+    "format-disconnected": " Disconnected"
+  },
+  "battery": {
+    "interval": 30,
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "{capacity}% ({timeTo})",
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  },
+  "custom/updates": {
+    "exec": "checkupdates | wc -l",
+    "interval": 600,
+    "format": " {}",
+    "tooltip-format": "System Updates"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "scroll-step": 5
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "interval": 5
+  },
+  "memory": {
+    "format": " {used}G",
+    "interval": 5
+  },
+  "disk": {
+    "format": " {free}G",
+    "interval": 60,
+    "path": "/"
+  },
+  "clock": {
+    "format": " {:%a %d %b %H:%M}"
+  },
+  "custom/logout": {
+    "format": "",
+    "on-click": "wlogout",
+    "tooltip-format": "Logout"
+  }
+}
+
