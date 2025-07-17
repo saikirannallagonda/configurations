@@ -1,0 +1,15 @@
+/*
+!.gitignore
+!.vimrc
+!.bashrc
+!backup.bat
+!restore_backup.sh
+!README.md
+!LICENSE
+
+!.config/
+.config/*
+!.config/hypr/
+!.config/kitty/
+!.config/waybar/
+!.config/wofi/
