@@ -1,8 +1,8 @@
 " Enable syntax highlighting
 syntax on
 
-" Set default color scheme
-colorscheme desert
+" Set default color scheme [elflord, industry, koehler, pablo, desert]
+colorscheme elflord
 
 " Use system clipboard for copy/paste
 set clipboard=unnamedplus
