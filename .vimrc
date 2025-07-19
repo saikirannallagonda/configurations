@@ -14,9 +14,10 @@ set number
 set relativenumber
 
 " Set tab to 4 spaces
-set tabstop=4
-set shiftwidth=4
 set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
 " Enable auto-indentation
 filetype on
