@@ -12,5 +12,6 @@
 .config/*
 !.config/hypr/
 !.config/kitty/
+!.config/nvim/
 !.config/waybar/
 !.config/wofi/
