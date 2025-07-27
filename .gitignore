@@ -1,7 +1,6 @@
 /*
 !.gitignore
 !.vimrc
-!.bashrc
 !backup.bat
 !backup.sh
 !restore_backup.sh

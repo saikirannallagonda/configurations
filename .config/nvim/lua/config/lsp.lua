@@ -1,4 +1,4 @@
--- lsp
+-- ~/.config/nvim/lua/config/lsp.lua
 --------------------------------------------------------------------------------
 -- See https://gpanders.com/blog/whats-new-in-neovim-0-11/ for a nice overview
 -- of how the lsp setup works in neovim 0.11+.

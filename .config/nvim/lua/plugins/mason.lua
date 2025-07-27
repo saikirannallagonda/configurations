@@ -22,7 +22,10 @@ return {
     "mason-org/mason-lspconfig.nvim",
     dependencies = { "mason-org/mason.nvim" },
     opts = {
-      ensure_installed = { "lua_ls", },  -- servers to auto install
+      ensure_installed = {
+        "lua_ls", "clangd", "html-ls", "css-ls", "typescript-language-server",
+        "json-lsp", "jdtls",
+      },  -- servers to auto install
       automatic_installation = true,  -- auto install if missing on startup
     },
   },
