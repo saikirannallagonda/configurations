@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     options = {
-      theme = "catppuccin",
+      theme = "onedark",
       component_separators = "",
       section_separators = "",
       disabled_filetypes = { "toggleterm", "NvimTree", "neo-tree" },
