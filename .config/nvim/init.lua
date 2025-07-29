@@ -7,12 +7,12 @@
 
 require("config.autocmds")
 require("config.functions")
-require("config.keymaps")           -- Keymaps
-require("config.options")           -- Editor settings
+require("config.keymaps")
+require("config.options")
 require("config.tabs")
 require("config.terminal")
 
 require("config.lsp")
-vim.lsp.enable({ "lua_ls", "html_ls", "css_ls", "js_ls", "java_ls" })
+vim.lsp.enable({ "lua-lsp", "clangd", })
 require("config.lazy")  -- Loads plugins from lua/plugins/*.lua
 
