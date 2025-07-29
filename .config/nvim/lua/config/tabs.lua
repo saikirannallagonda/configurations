@@ -1,4 +1,4 @@
--- ~/.config/nvim/lua/config/tabs.lua
+--der/ ~/.config/nvim/lua/config/tabs.lua
 --
 -- ============================================================================
 -- TABS

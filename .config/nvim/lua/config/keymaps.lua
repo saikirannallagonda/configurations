@@ -1,5 +1,9 @@
 -- ~/.config/nvim/lua/keymaps.lua
 
+-- Key mappings
+vim.g.mapleader = " "                              -- Set leader key to space
+vim.g.maplocalleader = " "                         -- Set local leader key (NEW)
+
 -- Normal mode mappings
 vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
@@ -47,7 +51,6 @@ vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Quick file navigation
--- vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>', { noremap = true, silent = true, desc = 'Toggle Neotree' })
 vim.keymap.set("n", "<leader>e", ":Explore<CR>", { desc = "Open file explorer" })
 vim.keymap.set("n", "<leader>ff", ":find ", { desc = "Find file" })
 

@@ -1,9 +1,5 @@
 -- ~/.config/nvim/lua/options.lua
 
--- Key mappings
-vim.g.mapleader = " "                              -- Set leader key to space
-vim.g.maplocalleader = " "                         -- Set local leader key (NEW)
-
 -- Basic settings
 vim.opt.number = true                              -- Line numbers
 vim.opt.relativenumber = true                      -- Relative line numbers
