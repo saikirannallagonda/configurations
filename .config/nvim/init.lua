@@ -12,7 +12,3 @@ require("config.options")
 require("config.tabs")
 require("config.terminal")
 
-require("config.lsp")
-vim.lsp.enable({ "lua-lsp", "clangd", })
-require("config.lazy")  -- Loads plugins from lua/plugins/*.lua
-
