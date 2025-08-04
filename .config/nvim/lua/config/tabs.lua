@@ -169,32 +169,158 @@ vim.cmd([[
 ]])
 
 -- Function to change statusline based on window focus
-local function setup_dynamic_statusline()
-  vim.api.nvim_create_autocmd({"WinEnter", "BufEnter"}, {
-    callback = function()
-    vim.opt_local.statusline = table.concat {
-      "  ",
-      "%#StatusLineBold#",
-      "%{v:lua.mode_icon()}",
-      "%#StatusLine#",
-      " │ %f %h%m%r",
-      "%{v:lua.git_branch()}",
-      " │ ",
-      "%{v:lua.file_type()}",
-      " | ",
-      "%{v:lua.file_size()}",
-      "%=",                     -- Right-align everything after this
-      "%l:%c  %P ",             -- Line:Column and Percentage
-    }
-    end
-  })
-  vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
+-- local function setup_dynamic_statusline()
+--   vim.api.nvim_create_autocmd({"WinEnter", "BufEnter"}, {
+--     callback = function()
+--     vim.opt_local.statusline = table.concat {
+--       "  ",
+--       "%#StatusLineBold#",
+--       "%{v:lua.mode_icon()}",
+--       "%#StatusLine#",
+--       " │ %f %h%m%r",
+--       "%{v:lua.git_branch()}",
+--       " │ ",
+--       "%{v:lua.file_type()}",
+--       " | ",
+--       "%{v:lua.file_size()}",
+--       "%=",                     -- Right-align everything after this
+--       "%l:%c  %P ",             -- Line:Column and Percentage
+--     }
+--     end
+--   })
+--   vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
+-- 
+--   vim.api.nvim_create_autocmd({"WinLeave", "BufLeave"}, {
+--     callback = function()
+--       vim.opt_local.statusline = "  %f %h%m%r │ %{v:lua.file_type()} | %=  %l:%c   %P "
+--     end
+--   })
+-- 
+--   vim.cmd [[
+--     highlight StatusLine guifg=#000000 guibg=#ffff5f
+--     highlight StatusLineNC guifg=#bbbbbb guibg=#000080
+--   ]]
+-- 
+-- end
+-- 
+-- setup_dynamic_statusline()
 
-  vim.api.nvim_create_autocmd({"WinLeave", "BufLeave"}, {
-    callback = function()
-      vim.opt_local.statusline = "  %f %h%m%r │ %{v:lua.file_type()} | %=  %l:%c   %P "
-    end
-  })
+
+-- Define highlight groups with bold text for different modes
+vim.api.nvim_set_hl(0, "StatusLineNormal", { fg = "#000000", bg = "#ffff5f", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineInsert", { fg = "#000000", bg = "#00ff00", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineVisual", { fg = "#000000", bg = "#ff00ff", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineVisualLine", { fg = "#FFFFFF", bg = "#800080", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineVisualBlock", { fg = "#FFFFFF", bg = "#800080", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineReplace", { fg = "#000000", bg = "#ff0000", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineCommand", { fg = "#000000", bg = "#00ffff", bold = true })
+vim.api.nvim_set_hl(0, "StatusLineNC", { fg = "#bbbbbb", bg = "#000080", bold = true })
+
+-- Mode words mapping
+local mode_words = {
+  n = "NORMAL",
+  i = "INSERT",
+  v = "VISUAL",
+  V = "VISUAL-LINE",
+  [""] = "VISUAL-BLOCK",
+  r = "REPLACE",
+  R = "REPLACE",
+  c = "COMMAND",
+}
+
+-- Get the current mode's highlight group and text label
+local function mode_highlight()
+  local mode = vim.fn.mode()
+  return (mode_words[mode] and ("%#StatusLine" .. mode_words[mode]:gsub("%-", "") .. "#") or "%#StatusLineNormal#"), mode_words[mode] or ""
 end
 
-setup_dynamic_statusline()
+-- Get current Git branch name (shell call)
+local function git_branch()
+  local handle = io.popen('git rev-parse --abbrev-ref HEAD 2> /dev/null')
+  if handle then
+    local branch = handle:read("*l")
+    handle:close()
+    if branch and #branch > 0 then
+      return "git:" .. branch .. " "
+    end
+  end
+  return ""
+end
+
+-- Human readable file size
+local function file_size()
+  local size = vim.fn.getfsize(vim.fn.expand("%:p"))
+  if size < 0 then return "" end
+  if size < 1024 then
+    return size .. "B "
+  elseif size < 1024 * 1024 then
+    return string.format("%.1fKB ", size / 1024)
+  else
+    return string.format("%.1fMB ", size / (1024 * 1024))
+  end
+end
+
+-- Return filetype text
+local function filetype_word()
+  return vim.bo.filetype ~= "" and vim.bo.filetype .. " " or ""
+end
+
+-- Return current file encoding, default utf-8
+local function file_encoding()
+  local enc = vim.bo.fileencoding
+  if enc == "" then enc = "utf-8" end
+  return enc .. " "
+end
+
+-- Return vi-compatible file format (unix/dos/mac)
+local function file_format()
+  return vim.bo.fileformat .. " "
+end
+
+-- Get basic diagnostics counts (errors and warnings)
+local function diagnostics_count()
+  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+  local result = ""
+  if errors > 0 then
+    result = result .. "E:" .. errors .. " "
+  end
+  if warnings > 0 then
+    result = result .. "W:" .. warnings .. " "
+  end
+  return result
+end
+
+-- Build the statusline string dynamically
+local function statusline()
+  local hl, mode_text = mode_highlight()
+  local branch = git_branch()
+  local size = file_size()
+  local ft = filetype_word()
+  local enc = file_encoding()
+  local fmt = file_format()
+  local diag = diagnostics_count()
+
+  return table.concat {
+    hl, " ", mode_text, " ",
+    branch,
+    "%f ",  -- filename with relative path
+--    ft,
+    size,
+    enc,
+--    fmt,
+    diag,
+    "%m%r", -- modified, readonly flags
+    "%=",
+    "Ln %l/%L, Col %c ",
+    "%#StatusLine#", -- reset highlight
+  }
+end
+
+-- Make the statusline function globally callable by vim
+_G.statusline_func = statusline
+
+-- Configure Neovim to use this statusline function
+vim.o.statusline = "%!v:lua.statusline_func()"
+vim.o.laststatus = 2
+
