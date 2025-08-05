@@ -6,4 +6,5 @@ require("config.keymaps")
 require("config.options")
 require("config.tabs")
 require("config.terminal")
+require("config.lsp")
 

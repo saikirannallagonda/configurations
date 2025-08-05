@@ -20,7 +20,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 
 -- Delete without yanking
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
+vim.keymap.set({ "n", "v" }, "D", '"_d', { desc = "Delete without yanking" })
 
 -- Buffer navigation
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
