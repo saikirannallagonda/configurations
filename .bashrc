@@ -25,6 +25,10 @@ if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git
+fi
+
 # History settings for better usability
 HISTCONTROL=ignoredups:erasedups  # Avoid duplicate entries
 HISTSIZE=10000

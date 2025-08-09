@@ -1,0 +1,37 @@
+
+# Include system-wide Readline settings
+$include /etc/inputrc
+
+# Enable case-insensitive completion for commands and file names
+set completion-ignore-case on
+
+# Show list of completions immediately when ambiguous, without needing a second tab
+set show-all-if-ambiguous on
+
+# Try to complete directly if only one match (default behavior)
+set show-all-if-unmodified on
+
+# Display completion prefix length, helps with long completions
+set completion-prefix-display-length 3
+
+# Highlight symlinked directories during completion
+set mark-symlinked-directories on
+
+# Enable colored output in some commands (like ls)
+set colored-stats on
+
+# Undo horizontal scrolling when completing long inputs, wrap to next line instead
+set horizontal-scroll-mode off
+
+# History search with up/down arrows that match based on what you've typed at line start
+"\C-p": history-search-backward
+"\C-n": history-search-forward
+
+# Example keybindings for moving and editing words
+# Map Ctrl+Left & Ctrl+Right arrows to move backward/forward by one word
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+
+# Others commonly included:
+# Set bell style none to disable bell/beep
+set bell-style none
