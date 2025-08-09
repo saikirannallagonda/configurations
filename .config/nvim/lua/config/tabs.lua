@@ -324,3 +324,11 @@ _G.statusline_func = statusline
 vim.o.statusline = "%!v:lua.statusline_func()"
 vim.o.laststatus = 2
 
+
+-- omni completion menu 
+vim.cmd [[highlight Pmenu      guibg=#33332e guifg=#fefecd]]     -- dark sand background, light tan text
+vim.cmd [[highlight PmenuSel   guibg=#ba7e42 guifg=#000000]]     -- golden brown select, black text
+vim.cmd [[highlight PmenuSbar  guibg=#77674a]]                   -- muted brown scrollbar
+vim.cmd [[highlight PmenuThumb guibg=#fecd82]]                   -- light sand scrollbar handle
+vim.cmd [[highlight ErrorMsg guibg=#ffeeaa guifg=#800000]]     -- pale yellow background, dark red text
+vim.cmd [[highlight WarningMsg guibg=#fff3c0 guifg=#ba7e42]]   -- light tan back, golden brown text
