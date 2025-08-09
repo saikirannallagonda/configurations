@@ -1,0 +1,19 @@
+
+######### TO MOUNT AND UNMOUNT A SSD #########
+
+# Identify the SSD
+lsblk
+
+# Create a mount point
+sudo mkdir /mnt/ssd
+
+# Mount the SSD
+sudo mount /dev/sda1 /mnt/ssd
+
+# Verify the mount
+df -h
+
+# Unmount the SSD
+sudo umount /mnt/ssd
+# Or
+sudo umount /dev/sda1
